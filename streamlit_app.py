@@ -26,7 +26,7 @@ class streamlit_im2im:
         uploaded_file = st.file_uploader("Choose a file", ['jpg', 'jpeg', 'png'])
         if uploaded_file is not None:
             print(f'{uploaded_file}')
-            nparr = np.fromstring(uploaded_file.getvalue(), np.uint8)
+            nparr = np.frombuffer(uploaded_file.getvalue(), np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         if img is not None:
@@ -42,7 +42,7 @@ class streamlit_im2im:
 
 def GaussianBlur(img, radius, sigma):
     ksize = 2 * radius + 1
-    out = cv2.GaussianBlur(img, ksize=(ksize, ksize), sigmaX=sigma, sigmaY=sigma)
+    out = cv2.GaussianBlur(img, (ksize, ksize), sigmaX=sigma, sigmaY=sigma)
     return out
 
 
